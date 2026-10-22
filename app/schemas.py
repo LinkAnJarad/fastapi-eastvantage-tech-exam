@@ -53,7 +53,7 @@ class AddressUpdate(BaseModel):
         examples = [45.0033]
     )
 
-    longitude: Optional[float] = Field(None, ge=-180.0, le=100.0,
+    longitude: Optional[float] = Field(None, ge=-180.0, le=180.0,
         description = "Longitude should be between -180 and 180.",
         examples = [110.0033]
     )
@@ -62,12 +62,4 @@ class AddressWithDistance(AddressResponse):
     """
     Schema for addresses when searching via proximity.
     """
-    distance_km: float = Field(..., description="Distance in kilometeres from search coordinates")
-
-
-
-class TestBase(BaseModel):
-    col1: str = Field(..., min_length=1, max_length=255, examples=["Hello World"])
-
-class TestCreate(TestBase):
-    pass
+    distance_km: float = Field(..., description="Distance in kilometers from search coordinates")

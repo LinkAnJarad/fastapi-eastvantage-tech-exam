@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app import models, schemas
 from haversine import haversine, Unit # for calculating distance between Earth coords
 
-def get_address_by_id(db: Session, address_id: int) -> Optional[models.Address]:
+def get_address(db: Session, address_id: int) -> Optional[models.Address]:
     """
     Retrieve singular address from an ID.
     """
@@ -49,14 +49,14 @@ def get_addresses_within_distance(db: Session, target_lat: float, target_lon: fl
     given target coordinates `target_lat` and `target_lon`.
     """
 
-    all_addresses = db.query(models.Address).all()
+    all_addresses = db.query(models.Address).all() # Get all addresses from the database; for larger datasets, consider pre-filtering or spatial indexing
 
     results = []
     target_coords = (target_lat, target_lon)
 
     for address in all_addresses:
         address_coords = (address.latitude, address.longitude)
-        distance_from_target = haversine(target_coords, address_coords, unit=Unit.KILOMETERS) 
+        distance_from_target = haversine(target_coords, address_coords, unit=Unit.KILOMETERS) # Calculate distance in kilometers
         if distance_from_target <= max_distance_km:
             results.append(
                 {

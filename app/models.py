@@ -23,15 +23,4 @@ class Address(Base):
     def __repr__(self):
         return f"Address(id={self.id}, street='{self.street}', barangay='{self.barangay}', city='{self.city}', region='{self.region}', postal_code='{self.postal_code}', latitude={self.latitude}, longitude={self.longitude})"
 
-
-class TestTable(Base):
-    __tablename__ = "test_table"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
-    col1: Mapped[str] = mapped_column(String(255), nullable=False)
-
-    def __repr__(self):
-        return f"TestTable(id={self.id}, col1='{self.col1}')"
-    
-
     

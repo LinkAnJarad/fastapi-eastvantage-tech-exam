@@ -48,7 +48,9 @@ def get_nearby_addresses(
         max_distance_km=max_distance_km
     )
 
-    # Format to response model of `schemas.AddressWithDistance`:
+    # Format to response model of `schemas.AddressWithDistance`. 
+    # The `get_addresses_within_distance` function returns a list of dicts with the address and distance as keys,
+    # so we need to convert it to the response model.
     response = []
     for item in nearby_addresses:
         address = item["address"]
