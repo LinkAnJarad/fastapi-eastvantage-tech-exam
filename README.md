@@ -30,7 +30,7 @@ A minimal FastAPI-based API for managing addresses with geographic coordinates; 
 
 ```bash
 git clone https://github.com/LinkAnJarad/fastapi-eastvantage-tech-exam
-cd addressbook
+cd fastapi-eastvantage-tech-exam
 
 # Create the virtual environment and install dependencies
 uv sync
@@ -46,7 +46,7 @@ dev dependencies into `.venv/`.
 
 ```bash
 git clone https://github.com/LinkAnJarad/fastapi-eastvantage-tech-exam
-cd addressbook
+cd fastapi-eastvantage-tech-exam
 
 python -m venv .venv
 
