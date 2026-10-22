@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 class AddressBase(BaseModel):
     """
@@ -41,6 +41,17 @@ class AddressUpdate(BaseModel):
     """
     Schema for updating addresses, all fields optional.
     """
+
+    @field_validator("*", mode="before")
+    @classmethod
+    def reject_explicit_nulls(cls, value, info):
+        """
+        Omitted fields stay untouched; explicitly sending `null` is rejected
+        because the corresponding database columns are NOT NULL.
+        """
+        if value is None:
+            raise ValueError(f"{info.field_name} cannot be null")
+        return value
     street: Optional[str] = Field(None, min_length=1, max_length=255, examples=["1000 EDSA"])
     barangay: Optional[str] = Field(None, min_length=1, max_length=255, examples=["Barangay Kalusugan"])
     city: Optional[str] = Field(None, min_length=1, max_length=255, examples=["Quezon City"])
